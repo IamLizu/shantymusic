@@ -1,5 +1,6 @@
 import React from "react";
 import setPageTitle from "../setPageTitle";
+import { Link } from "react-router-dom";
 
 export default function Login() {
     setPageTitle("Login | Shanty Music");
@@ -16,18 +17,18 @@ export default function Login() {
 
             <div className="flex justify-center items-center">
                 <div className="space-y-5 xs:w-72 sm:w-80 md:w-96">
-                    <input type="text" placeholder="Please enter your email" />
+                    <input type="text" placeholder="Email" />
                     <br />
-                    <input
-                        type="password"
-                        placeholder="Please enter your password"
-                    />
+                    <input type="password" placeholder="Password" />
                     <br />
                     <button className="btnPrimary ">Login</button>
                     <p className="space-x-3 text-center">
-                        <a href="#" className="font-medium defaultLink">
+                        <Link
+                            to="/register"
+                            className="font-medium defaultLink"
+                        >
                             Register
-                        </a>
+                        </Link>
 
                         <span>/</span>
 

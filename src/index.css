@@ -11,7 +11,11 @@
 
 @layer base {
     [type="text"],
-    [type="password"] {
+    [type="email"],
+    [type="date"],
+    [type="password"],
+    [type="tel"],
+    select {
         @apply w-full rounded-md text-gray-800 border-gray-400 focus:border-indigo-400 focus:ring-indigo-400 drop-shadow-md;
     }
 }
