@@ -9,21 +9,9 @@ function App() {
         <>
             <Router>
                 <Switch>
-                    <Route
-                        exact
-                        path={process.env.PUBLIC_URL + "/login"}
-                        component={Login}
-                    />
-                    <Route
-                        exact
-                        path={process.env.PUBLIC_URL + "/register"}
-                        component={Register}
-                    />
-                    <Route
-                        exact
-                        path={process.env.PUBLIC_URL + "/dashboard"}
-                        component={Dashboard}
-                    />
+                    <Route exact path="/" component={Login} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/dashboard" component={Dashboard} />
                 </Switch>
             </Router>
         </>
