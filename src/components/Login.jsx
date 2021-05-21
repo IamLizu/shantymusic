@@ -9,7 +9,7 @@ export default function Login() {
         <div className="grid justify-center content-center h-screen">
             <div className="flex justify-center">
                 <img
-                    src="/shanty_logo.png"
+                    src="/shantymusic/shanty_logo.png"
                     alt="Shanty Music"
                     className="w-40 md:w-50 pb-5 drop-shadow-lg"
                 />
