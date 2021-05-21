@@ -7,7 +7,7 @@ import Dashboard from "./components/Dashboard";
 function App() {
     return (
         <>
-            <Router>
+            <Router basename={process.env.PUBLIC_URL}>
                 <Switch>
                     <Route exact path="/login" component={Login} />
                     <Route exact path="/register" component={Register} />
