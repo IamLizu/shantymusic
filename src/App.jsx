@@ -1,17 +1,29 @@
 import React from "react";
 import Login from "./components/Login";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import Register from "./components/Register";
 import Dashboard from "./components/Dashboard";
 
 function App() {
     return (
         <>
-            <Router basename={process.env.PUBLIC_URL}>
+            <Router>
                 <Switch>
-                    <Route exact path="/login" component={Login} />
-                    <Route exact path="/register" component={Register} />
-                    <Route exact path="/dashboard" component={Dashboard} />
+                    <Route
+                        exact
+                        path={process.env.PUBLIC_URL + "/login"}
+                        component={Login}
+                    />
+                    <Route
+                        exact
+                        path={process.env.PUBLIC_URL + "/register"}
+                        component={Register}
+                    />
+                    <Route
+                        exact
+                        path={process.env.PUBLIC_URL + "/dashboard"}
+                        component={Dashboard}
+                    />
                 </Switch>
             </Router>
         </>
