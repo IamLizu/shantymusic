@@ -1,7 +1,8 @@
 import React from "react";
 import Login from "./components/Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Register from "./components/Register";
+import RegisterLabel from "./components/label/Register";
+import RegisterListener from "./components/listener/Register";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./routeProtection";
 
@@ -11,7 +12,16 @@ function App() {
             <Router basename="/shantymusic">
                 <Switch>
                     <Route exact path="/" component={Login} />
-                    <Route exact path="/register" component={Register} />
+                    <Route
+                        exact
+                        path="/register/label"
+                        component={RegisterLabel}
+                    />
+                    <Route
+                        exact
+                        path="/register/listener"
+                        component={RegisterListener}
+                    />
                     <ProtectedRoute
                         exact
                         path="/dashboard"
