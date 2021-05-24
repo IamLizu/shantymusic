@@ -10,7 +10,7 @@ import EmailVerify from "./components/EmailVerify";
 function App() {
     return (
         <>
-            <Router basename="/shantymusic">
+            <Router>
                 <Switch>
                     <Route exact path="/" component={Login} />
                     <Route
