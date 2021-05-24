@@ -5,6 +5,7 @@ import RegisterLabel from "./components/label/Register";
 import RegisterListener from "./components/listener/Register";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./routeProtection";
+import EmailVerify from "./components/EmailVerify";
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                         path="/dashboard"
                         component={Dashboard}
                     />
+                    <Route exact path="/verify" component={EmailVerify} />
                 </Switch>
             </Router>
         </>
