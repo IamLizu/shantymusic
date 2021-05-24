@@ -36,7 +36,7 @@ export default function Login() {
                 setLoginMessage(errorMessage);
             }
 
-            if (token !== null) {
+            if (token !== null && token !== undefined) {
                 let date = new Date();
                 date.setDate(date.getTime() + 30 * 60 * 1000);
                 document.cookie = `Jwt-Token=${token}; expires=${date.toUTCString()};`;

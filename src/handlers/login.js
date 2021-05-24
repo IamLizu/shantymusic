@@ -24,9 +24,7 @@ export default async (email, password) => {
         token = loginResponse.data.token;
         errorMessage = "";
     } catch (err) {
-        if (err.message.match(/401/)) {
-            errorMessage = "Invalid username or password";
-        }
+        errorMessage = JSON.parse(err.request.response).message;
     }
 
     return { token, errorMessage };
