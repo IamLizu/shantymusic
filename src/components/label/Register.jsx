@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import shantyLogo from "../../assets/images/shanty_logo.png";
 import register from "../../handlers/label/register";
 import RegistrationSuccess from "../RegistrationSuccess";
+import { dateTypeSetter, imageTypeSetter } from "../../lib";
 
 export default function Register() {
     setPageTitle("Sign Up | Shanty Music");
@@ -139,8 +140,21 @@ export default function Register() {
                         placeholder="Password"
                         onChange={passwordInputHandler}
                     />
-                    <input type="date" onChange={estDateHandler} />
-                    <input type="file" ref={imageRef} />
+                    <input
+                        placeholder="Est. Date"
+                        type="text"
+                        onFocus={dateTypeSetter}
+                        onBlur={dateTypeSetter}
+                        id="date"
+                        onChange={estDateHandler}
+                    />
+                    <input
+                        placeholder="Label icon"
+                        type="text"
+                        onFocus={imageTypeSetter}
+                        id="image"
+                        ref={imageRef}
+                    />
                     <select onChange={regionHandler} value={region}>
                         <option value="" disabled defaultChecked>
                             Region
