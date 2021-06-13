@@ -17,3 +17,13 @@ export const validateString = async (stringParam) => {
 
     schema.validateAsync(stringParam);
 };
+
+export const validateEmail = async (email) => {
+    const emailSchema = Joi.object({
+        email: Joi.string()
+            .email({ tlds: { allow: false } })
+            .required(),
+    });
+
+    await emailSchema.validateAsync({ email });
+};
