@@ -91,9 +91,12 @@ export default function Login() {
 
                         <span>/</span>
 
-                        <a href="#" className="font-medium defaultLink">
-                            Forgot Password
-                        </a>
+                        <Link
+                            to="/reset-password"
+                            className="font-medium defaultLink"
+                        >
+                            Reset Password
+                        </Link>
                     </p>
                 </div>
             </div>

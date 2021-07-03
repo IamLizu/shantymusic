@@ -6,6 +6,7 @@ import RegisterListener from "./components/listener/Register";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./routeProtection";
 import EmailVerify from "./components/EmailVerify";
+import ResetPassword from "./components/ResetPassword";
 
 function App() {
     return (
@@ -13,6 +14,11 @@ function App() {
             <Router>
                 <Switch>
                     <Route exact path="/" component={Login} />
+                    <Route
+                        exact
+                        path="/reset-password"
+                        component={ResetPassword}
+                    />
                     <Route
                         exact
                         path="/register/label"
