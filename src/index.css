@@ -1,12 +1,25 @@
 @tailwind base;
 @tailwind components;
 .btnPrimary {
-    @apply bg-indigo-500 hover:bg-indigo-400 active:bg-indigo-700  text-white py-1 px-5 font-semibold uppercase tracking-widest rounded-sm focus:outline-none focus:ring-2 focus:border-indigo-400 focus:ring-indigo-400;
+    @apply bg-gray-500 hover:bg-gray-400 active:bg-gray-700  text-white py-1 px-5 font-semibold cursor-pointer uppercase tracking-widest rounded-sm focus:outline-none focus:ring-2 focus:border-gray-400 focus:ring-gray-400;
 }
 
 .defualtLink {
     @apply opacity-90 hover:text-blue-800 hover:underline;
 }
+
+.sideBarItem {
+    @apply flex items-center gap-2 text-xl font-thin p-2 px-10 cursor-pointer hover:bg-gray-200 hover:text-gray-900;
+}
+
+.playlistItem {
+    @apply text-gray-300 hover:text-white cursor-pointer;
+}
+
+.react-jinke-music-player-main .music-player-panel {
+    backdrop-filter: blur(400px) !important;
+}
+
 @tailwind utilities;
 
 @layer base {
