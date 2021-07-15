@@ -1,11 +1,14 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useHistory, Link } from "react-router-dom";
 import { useClickAway } from "react-use";
+import getListener from "../handlers/getListener";
+import { shortString } from "../lib";
 
 export default function ProfileIcon() {
     const history = useHistory();
     const [menuVisibility, setMenuVisibility] = useState("hidden");
+    const [user, setUser] = useState({});
 
     const logoutHandler = () => {
         Cookies.remove("Jwt-Token");
@@ -18,20 +21,42 @@ export default function ProfileIcon() {
     const outsideRef = useRef(null);
     useClickAway(outsideRef, () => setMenuVisibility("hidden"));
 
+    useEffect(() => {
+        (async () => {
+            const { listener } = await getListener();
+            setUser(listener);
+        })();
+    }, []);
+
     return (
-        <div className="absolute left-0 m-5">
+        <div className="absolute left-0 m-5" ref={outsideRef}>
             <div
-                className="hover:shadow-2xl rounded-full p-1 cursor-pointer"
-                ref={outsideRef}
+                className="hover:shadow-2xl p-1 cursor-pointer flex items-center gap-2 rounded-r-full rounded-l-full pr-3 mb-5 bg-black opacity-90 hover:bg-opacity-80 text-white"
                 onClick={toggleMenu}
             >
-                <img
-                    src="https://shantyblob.blob.core.windows.net/shanty/profileimages/308942a13c53cc566c448cef6c7df12d"
-                    alt="user"
-                    width="50"
-                    height="50"
-                    className="rounded-full"
-                />
+                {user ? (
+                    <>
+                        <img
+                            src={user.profileImageUrl || ""}
+                            alt={
+                                user.firstName || "" + " " + user.lastName || ""
+                            }
+                            width="50"
+                            height="50"
+                            className="rounded-full"
+                        />
+                        <p className="font-medium">
+                            {shortString(
+                                `${user.firstName || ""} ${
+                                    user.lastName || ""
+                                }`,
+                                12
+                            )}
+                        </p>
+                    </>
+                ) : (
+                    <></>
+                )}
             </div>
 
             <div

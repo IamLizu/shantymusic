@@ -11,3 +11,9 @@ export const dateTypeSetter = (e) => {
 export const imageTypeSetter = () => {
     document.getElementById("image").type = "file";
 };
+
+export const shortString = (string, sizeInChar) => {
+    if (string.length > sizeInChar) {
+        return string.substring(0, sizeInChar) + "...";
+    }
+};

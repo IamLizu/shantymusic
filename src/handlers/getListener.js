@@ -6,7 +6,7 @@ export default async () => {
     let errorMessage, listener, getRequestResponse;
 
     try {
-        getRequestResponse = await axios.post(`${ENDPOINT}/User/get/listener`, {
+        getRequestResponse = await axios.get(`${ENDPOINT}/User/get/listener`, {
             headers: {
                 JwtToken: Cookies.get("Jwt-Token"),
             },
