@@ -12,6 +12,10 @@
     @apply flex items-center gap-2 text-xl font-thin p-2 px-10 cursor-pointer hover:bg-gray-200 hover:text-gray-900;
 }
 
+.profileMenuItem {
+    @apply font-semibold cursor-pointer hover:bg-gray-200 hover:text-gray-900 px-6 py-1;
+}
+
 .playlistItem {
     @apply text-gray-300 hover:text-white cursor-pointer;
 }
