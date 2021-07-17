@@ -9,7 +9,7 @@
 }
 
 .sideBarItem {
-    @apply flex items-center gap-2 text-xl font-thin p-2 px-10 cursor-pointer hover:bg-gray-200 hover:text-gray-900;
+    @apply flex items-center gap-2 text-lg font-thin p-2 px-10 cursor-pointer hover:bg-gray-200 hover:text-gray-900;
 }
 
 .profileMenuItem {
@@ -22,6 +22,22 @@
 
 .react-jinke-music-player-main .music-player-panel {
     backdrop-filter: blur(400px) !important;
+}
+
+.flexGap2 {
+    @apply flex items-center gap-2;
+}
+
+.flexBetween {
+    @apply flex items-center justify-between;
+}
+
+.profileItemLabel {
+    @apply opacity-60 py-2 font-medium;
+}
+
+.profileItemValue {
+    @apply font-medium py-2;
 }
 
 @tailwind utilities;
