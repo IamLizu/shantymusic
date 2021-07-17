@@ -8,6 +8,7 @@ import ProtectedRoute from "./routeProtection";
 import EmailVerify from "./components/EmailVerify";
 import ResetPassword from "./components/ResetPassword";
 import Account from "./components/listener/Account";
+import ChangePassword from "./components/ChangePassword";
 
 function App() {
     return (
@@ -36,6 +37,11 @@ function App() {
                         component={Dashboard}
                     />
                     <ProtectedRoute exact path="/account" component={Account} />
+                    <ProtectedRoute
+                        exact
+                        path="/account/change-password"
+                        component={ChangePassword}
+                    />
                     <Route exact path="/verify" component={EmailVerify} />
                 </Switch>
             </Router>
