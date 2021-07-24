@@ -9,6 +9,7 @@ import EmailVerify from "./components/EmailVerify";
 import ResetPassword from "./components/ResetPassword";
 import Account from "./components/listener/Account";
 import ChangePassword from "./components/ChangePassword";
+import EditProfile from "./components/listener/EditProfile";
 
 function App() {
     return (
@@ -41,6 +42,11 @@ function App() {
                         exact
                         path="/account/change-password"
                         component={ChangePassword}
+                    />
+                    <ProtectedRoute
+                        exact
+                        path="/account/edit"
+                        component={EditProfile}
                     />
                     <Route exact path="/verify" component={EmailVerify} />
                 </Switch>
