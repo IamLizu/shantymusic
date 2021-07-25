@@ -8,6 +8,18 @@
     @apply opacity-90 hover:text-blue-800 hover:underline;
 }
 
+.mainGridCol5 {
+    @apply grid grid-cols-5 mx-auto container;
+}
+
+.mainGridChild {
+    @apply px-10 py-20 col-span-4 my-10 space-y-6 rounded-md;
+}
+
+.sidebar {
+    @apply w-64 bg-black bg-opacity-90 h-screen right-0 absolute text-gray-100 space-y-6 col-span-1 py-5;
+}
+
 .sideBarItem {
     @apply flex items-center gap-2 text-lg font-thin p-2 px-10 cursor-pointer hover:bg-gray-200 hover:text-gray-900;
 }

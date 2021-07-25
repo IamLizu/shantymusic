@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React from "react";
 import shantyLogo from "../assets/images/shanty_logo.png";
 import shantyText from "../assets/images/Shanty_text.png";
@@ -10,7 +11,7 @@ import {
 } from "react-icons/fa";
 import playlistNames from "../dummy/playlistName.json";
 
-export default function Sidebar() {
+export default function Sidebar({ handleCreateVisiblity }) {
     const playlistBlock = playlistNames.map((item) => (
         <p key={item.name} className="playlistItem">
             {item.name}
@@ -47,9 +48,16 @@ export default function Sidebar() {
                 {playlistBlock}
             </div>
 
-            <div className="btnPrimary flex justify-center items-center gap-2 text-sm mx-5 absolute bottom-24 left-3">
+            <div
+                className="btnPrimary flex justify-center items-center gap-2 text-sm mx-5 absolute bottom-24 left-3"
+                onClick={handleCreateVisiblity}
+            >
                 <FaPlus /> <p>Create Playlist</p>
             </div>
         </div>
     );
 }
+
+Sidebar.propTypes = {
+    handleCreateVisiblity: PropTypes.func.isRequired,
+};
