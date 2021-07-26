@@ -9,15 +9,9 @@ import {
     FaSearch,
     FaStoreAlt,
 } from "react-icons/fa";
-import playlistNames from "../dummy/playlistName.json";
+import Playlists from "./listener/playlist/Playlists";
 
 export default function Sidebar({ handleCreateVisiblity }) {
-    const playlistBlock = playlistNames.map((item) => (
-        <p key={item.name} className="playlistItem">
-            {item.name}
-        </p>
-    ));
-
     return (
         <div className="w-64 bg-black bg-opacity-90 h-screen right-0 absolute text-gray-100 space-y-6">
             <div className="flex justify-center my-3">
@@ -45,7 +39,7 @@ export default function Sidebar({ handleCreateVisiblity }) {
             <hr className="opacity-25 mx-5" />
 
             <div className="mx-10 overflow-auto h-40 2xl:h-80 space-y-3">
-                {playlistBlock}
+                <Playlists />
             </div>
 
             <div
