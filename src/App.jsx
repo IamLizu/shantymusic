@@ -2,14 +2,14 @@ import React from "react";
 import Login from "./components/Login";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import RegisterLabel from "./components/label/Register";
-import RegisterListener from "./components/listener/Register";
+import RegisterListener from "./components/listener/account/Register";
 import Dashboard from "./components/Dashboard";
 import ProtectedRoute from "./routeProtection";
 import EmailVerify from "./components/EmailVerify";
 import ResetPassword from "./components/ResetPassword";
-import Account from "./components/listener/Account";
+import Account from "./components/listener/account/Account";
 import ChangePassword from "./components/ChangePassword";
-import EditProfile from "./components/listener/EditProfile";
+import EditProfile from "./components/listener/account/EditProfile";
 
 function App() {
     return (

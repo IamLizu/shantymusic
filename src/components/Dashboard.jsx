@@ -3,7 +3,7 @@ import setPageTitle from "../setPageTitle";
 import Player from "./Payer";
 import Sidebar from "./Sidebar";
 import ProfileIcon from "./ProfileIcon";
-import CreatePlayList from "./listener/CreatePlayList";
+import CreatePlayList from "./listener/playlist/CreatePlayList";
 import { useClickAway } from "react-use";
 
 export default function Dashboard() {

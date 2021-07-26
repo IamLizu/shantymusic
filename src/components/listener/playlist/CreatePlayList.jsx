@@ -4,7 +4,7 @@ import React, {
     useImperativeHandle,
     forwardRef,
 } from "react";
-import createPlaylist from "../../handlers/listener/createPlaylist";
+import createPlaylist from "../../../handlers/listener/createPlaylist";
 
 const CreatePlayList = (props, ref) => {
     const [playlistName, setPlaylistName] = useState("name");
