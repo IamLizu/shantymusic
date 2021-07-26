@@ -13,7 +13,7 @@ import Playlists from "./listener/playlist/Playlists";
 
 export default function Sidebar({ handleCreateVisiblity, shouldUpdate }) {
     return (
-        <div className="w-64 bg-black bg-opacity-90 h-screen right-0 absolute text-gray-100 space-y-6">
+        <div className="w-64 bg-black bg-opacity-90 h-screen right-0 top-0 absolute text-gray-100 space-y-6">
             <div className="flex justify-center my-3">
                 <img src={shantyLogo} alt="Shanty Music" width="55" />
                 <img src={shantyText} alt="Shanty Music" width="100" />
@@ -38,7 +38,7 @@ export default function Sidebar({ handleCreateVisiblity, shouldUpdate }) {
             </div>
             <hr className="opacity-25 mx-5" />
 
-            <div className="mx-10 overflow-auto space-y-3">
+            <div className="mx-10 overflow-auto h-1/3 lg:h-2/4 space-y-3">
                 <Playlists shouldUpdate={shouldUpdate} />
             </div>
 
