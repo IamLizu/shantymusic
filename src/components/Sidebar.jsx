@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import Playlists from "./listener/playlist/Playlists";
 
-export default function Sidebar({ handleCreateVisiblity }) {
+export default function Sidebar({ handleCreateVisiblity, shouldUpdate }) {
     return (
         <div className="w-64 bg-black bg-opacity-90 h-screen right-0 absolute text-gray-100 space-y-6">
             <div className="flex justify-center my-3">
@@ -38,8 +38,8 @@ export default function Sidebar({ handleCreateVisiblity }) {
             </div>
             <hr className="opacity-25 mx-5" />
 
-            <div className="mx-10 overflow-auto h-40 2xl:h-80 space-y-3">
-                <Playlists />
+            <div className="mx-10 overflow-auto space-y-3">
+                <Playlists shouldUpdate={shouldUpdate} />
             </div>
 
             <div
@@ -54,4 +54,5 @@ export default function Sidebar({ handleCreateVisiblity }) {
 
 Sidebar.propTypes = {
     handleCreateVisiblity: PropTypes.func.isRequired,
+    shouldUpdate: PropTypes.number,
 };

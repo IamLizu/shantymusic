@@ -1,7 +1,8 @@
+import PropTypes from "prop-types";
 import React, { useEffect } from "react";
 import getAllPlaylist from "../../../handlers/listener/playlist/getAllPlaylist";
 
-export default function Playlists() {
+export default function Playlists({ shouldUpdate }) {
     const [playlists, setPlaylists] = React.useState([]);
 
     useEffect(() => {
@@ -11,7 +12,7 @@ export default function Playlists() {
 
             console.log("requesting playlist list from sidebar");
         })();
-    }, []);
+    }, [shouldUpdate]);
 
     const playlistsList = playlists
         ? playlists.map((item) => (
@@ -23,3 +24,7 @@ export default function Playlists() {
 
     return playlistsList;
 }
+
+Playlists.propTypes = {
+    shouldUpdate: PropTypes.number,
+};

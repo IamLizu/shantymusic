@@ -12,8 +12,14 @@ export default function Dashboard() {
     const [createPlayListVisibiity, setCreatePlayListVisibiity] = useState(
         "hidden"
     );
+    const [playListCreated, setPlayListCreated] = useState(0);
 
     const handleCreateVisiblity = () => setCreatePlayListVisibiity("visibile");
+    const handlePlaylistCreated = () => {
+        setPlayListCreated(playListCreated + 1);
+        setCreatePlayListVisibiity("hidden");
+        childRef.current.clearValues();
+    };
 
     const childRef = useRef();
     const outsideRef = useRef(null);
@@ -32,11 +38,17 @@ export default function Dashboard() {
                         className={`${createPlayListVisibiity}`}
                         ref={outsideRef}
                     >
-                        <CreatePlayList ref={childRef} />
+                        <CreatePlayList
+                            ref={childRef}
+                            handlePlaylistCreated={handlePlaylistCreated}
+                        />
                     </div>
                 </div>
                 <div className="sidebar">
-                    <Sidebar handleCreateVisiblity={handleCreateVisiblity} />
+                    <Sidebar
+                        handleCreateVisiblity={handleCreateVisiblity}
+                        shouldUpdate={playListCreated}
+                    />
                 </div>
             </div>
 

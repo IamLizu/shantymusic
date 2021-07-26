@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import React, {
     useState,
     useEffect,
@@ -22,6 +23,7 @@ const CreatePlayList = (props, ref) => {
         if (message) {
             setPlaylistCreationMessage(message);
             setPlaylistName("");
+            props.handlePlaylistCreated();
         } else {
             setPlaylistCreationMessage(errorMessage);
         }
@@ -61,6 +63,10 @@ const CreatePlayList = (props, ref) => {
             </button>
         </div>
     );
+};
+
+CreatePlayList.propTypes = {
+    handlePlaylistCreated: PropTypes.func,
 };
 
 export default forwardRef(CreatePlayList);
