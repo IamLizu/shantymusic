@@ -26,20 +26,30 @@ export default function Login() {
 
     useEffect(() => {
         setAuthToken(Cookies.get("Jwt-Token"));
+
+        console.log("Getting user type from cookies.");
     }, [authToken]);
 
     const loginHandler = async () => {
         if (email && password) {
-            const { token, errorMessage } = await login(email, password);
+            setLoginMessage(
+                "Please wait while your request is being processed."
+            );
+            const { token, type, errorMessage } = await login(email, password);
 
             if (errorMessage) {
                 setLoginMessage(errorMessage);
+            }
+
+            if (type === "label") {
+                window.location.href = `https://shantymusiclabel.herokuapp.com?type=label&token=${token}`;
             }
 
             if (token !== null && token !== undefined) {
                 let date = new Date();
                 date.setDate(date.getTime() + 30 * 60 * 1000);
                 document.cookie = `Jwt-Token=${token}; expires=${date.toUTCString()};`;
+                document.cookie = `type=${type}; expires=${date.toUTCString()};`;
 
                 history.push("dashboard");
             }
