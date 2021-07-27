@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import getPlaylist from "../../../handlers/listener/playlist/getPlaylist";
 import Default from "../layouts/Default";
 import { FaPlayCircle } from "react-icons/fa";
+import deletePlaylist from "../../../handlers/listener/playlist/deletePlaylist";
 
 export default function Playlist({ match }) {
     const [playlist, setPlaylist] = React.useState([]);
@@ -12,6 +13,10 @@ export default function Playlist({ match }) {
         setShowPlaylistMenu((value) =>
             value === "hidden" ? "visible" : "hidden"
         );
+
+    const onDeletePlaylist = async () => {
+        await deletePlaylist(match.params.id);
+    };
 
     useEffect(() => {
         (async () => {
@@ -56,7 +61,9 @@ export default function Playlist({ match }) {
                 >
                     <p className="profileMenuItem">Update playlist</p>
                     <hr className="opacity-50" />
-                    <p className="profileMenuItem">Delete playlist</p>
+                    <p className="profileMenuItem" onClick={onDeletePlaylist}>
+                        Delete playlist
+                    </p>
                 </div>
             </div>
         </Default>
