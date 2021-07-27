@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import setPageTitle from "../../../setPageTitle";
 import Player from "../../Payer";
 import Sidebar from "../../Sidebar";
 import ProfileIcon from "../../ProfileIcon";
 import CreatePlayList from "../../listener/playlist/CreatePlayList";
 import { useClickAway } from "react-use";
+import Cookies from "js-cookie";
 
 export default function Default({ title, children }) {
     setPageTitle(`${title} | Shanty Music`);
@@ -29,7 +30,15 @@ export default function Default({ title, children }) {
         childRef.current.clearValues();
     });
 
-    return (
+    useEffect(() => {
+        if (Cookies.get("type") === "label") {
+            window.location.href = `https://shantymusiclabel.herokuapp.com?type=label&token=${Cookies.get(
+                "Jwt-Token"
+            )}`;
+        }
+    }, []);
+
+    return Cookies.get("type") === "listener" ? (
         <>
             <ProfileIcon />
 
@@ -57,7 +66,7 @@ export default function Default({ title, children }) {
 
             <Player />
         </>
-    );
+    ) : null;
 }
 
 Default.propTypes = {
