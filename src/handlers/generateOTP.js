@@ -1,3 +1,3 @@
-module.exports = async () => {
+export default async () => {
     return Math.floor(100000 + Math.random() * 900000);
 };
