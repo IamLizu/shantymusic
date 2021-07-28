@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import getPlaylist from "../../../handlers/listener/playlist/getPlaylist";
 import Default from "../layouts/Default";
 import { FaPlayCircle } from "react-icons/fa";
 import deletePlaylist from "../../../handlers/listener/playlist/deletePlaylist";
+import { useClickAway } from "react-use";
+import { useHistory } from "react-router-dom";
 
 export default function Playlist({ match }) {
     const [playlist, setPlaylist] = React.useState([]);
@@ -15,8 +17,16 @@ export default function Playlist({ match }) {
         );
 
     const onDeletePlaylist = async () => {
+        console.log(`Deleting playlist: ${match.params.id}`);
         await deletePlaylist(match.params.id);
+
+        history.push("/dashboard");
     };
+
+    const history = useHistory();
+
+    const outsideRef = useRef(null);
+    useClickAway(outsideRef, () => setShowPlaylistMenu("hidden"));
 
     useEffect(() => {
         (async () => {
@@ -48,15 +58,14 @@ export default function Playlist({ match }) {
                 <FaPlayCircle className="w-20 h-20 opacity-70 hover:opacity-80 cursor-pointer" />
 
                 <button
-                    id="contextMenu"
-                    className="text-6xl contextMenu text-gray-900 opacity-80 hover:opacity-90 cursor-pointer"
-                    onBlur={() => setShowPlaylistMenu("hidden")}
+                    className="text-6xl text-gray-900 opacity-80 hover:opacity-90 cursor-pointer"
                     onClick={contextMenuToggler}
                 >
                     ···
                 </button>
 
                 <div
+                    ref={outsideRef}
                     className={`${showPlaylistMenu} bg-gray-700 text-white p-2 py-2 space-y-2`}
                 >
                     <p className="profileMenuItem">Update playlist</p>
