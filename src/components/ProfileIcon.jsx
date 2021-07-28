@@ -22,10 +22,23 @@ export default function ProfileIcon() {
     useClickAway(outsideRef, () => setMenuVisibility("hidden"));
 
     useEffect(() => {
-        (async () => {
-            const { listener } = await getListener();
-            setUser(listener);
-        })();
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        console.log("Getting user for the profile icon: Origin-Session");
+
+        if (!user || user === null) {
+            (async () => {
+                const { listener } = await getListener();
+                setUser(listener);
+
+                console.log("No user data in session.");
+                console.log("Getting user for the profile icon: Origin-Server");
+                console.log("Setting user in session storage for later use");
+
+                sessionStorage.setItem("user", JSON.stringify(listener));
+            })();
+        } else {
+            setUser(user);
+        }
     }, []);
 
     return (

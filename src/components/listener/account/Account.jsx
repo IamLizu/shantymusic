@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import setPageTitle from "../../../setPageTitle";
-import getListener from "../../../handlers/getListener";
 import Sidebar from "../Sidebar";
 
 export default function Account() {
@@ -9,22 +8,13 @@ export default function Account() {
     const [user, setUser] = useState(null);
 
     useEffect(() => {
-        (async () => {
-            console.log(`Fetching user for Accounts page.`);
-            const { listener } = await getListener();
-            setUser(listener);
-
-            let date = new Date();
-            date.setDate(date.getTime() + 30 * 60 * 1000);
-            document.cookie = `userImage=${
-                listener.profileImageUrl
-            }; expires=${date.toUTCString()};`;
-        })();
+        setUser(JSON.parse(sessionStorage.getItem("user")));
+        console.log("Getting user for account overview: Origin-Session");
     }, []);
 
     return (
         <div className="grid grid-cols-5 mx-auto container">
-            {user ? <Sidebar userImage={user.profileImageUrl} /> : null}
+            {user ? <Sidebar /> : null}
 
             <div className="px-10 py-10 shadow-md col-span-4 my-10 space-y-6 rounded-md">
                 <h2 className="text-4xl font-bold text-gray-900">
