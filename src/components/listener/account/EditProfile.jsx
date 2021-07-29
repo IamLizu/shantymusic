@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "../Sidebar";
 import setPageTitle from "../../../setPageTitle";
 import editProfile from "../../../handlers/listener/editProfile";
+import getListener from "../../../handlers/getListener";
+import { useHistory } from "react-router-dom";
 
 export default function EditProfile() {
     setPageTitle("Edit Profile | Shanty Music");
@@ -12,6 +14,7 @@ export default function EditProfile() {
     const [message, setMessage] = useState("");
     const [region, setRegion] = useState("");
 
+    const history = useHistory();
     const imageRef = useRef();
 
     const handleFirstNameChange = (event) => setFirstName(event.target.value);
@@ -36,6 +39,23 @@ export default function EditProfile() {
                 setMessage(errorMessage);
             } else {
                 setMessage(message);
+
+                (async () => {
+                    const { listener } = await getListener();
+
+                    console.log("No user data in session.");
+                    console.log(
+                        "Getting user for the profile icon: Origin-Server"
+                    );
+                    console.log(
+                        "Setting user in session storage for later use"
+                    );
+
+                    sessionStorage.removeItem("user");
+                    sessionStorage.setItem("user", JSON.stringify(listener));
+
+                    history.push("/account");
+                })();
             }
         }
     };
