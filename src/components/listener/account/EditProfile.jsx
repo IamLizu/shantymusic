@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import Sidebar from "../Sidebar";
 import setPageTitle from "../../../setPageTitle";
-import getListener from "../../../handlers/getListener";
 import editProfile from "../../../handlers/listener/editProfile";
+import getListener from "../../../handlers/getListener";
+import { useHistory } from "react-router-dom";
 
 export default function EditProfile() {
     setPageTitle("Edit Profile | Shanty Music");
@@ -13,6 +14,7 @@ export default function EditProfile() {
     const [message, setMessage] = useState("");
     const [region, setRegion] = useState("");
 
+    const history = useHistory();
     const imageRef = useRef();
 
     const handleFirstNameChange = (event) => setFirstName(event.target.value);
@@ -37,19 +39,31 @@ export default function EditProfile() {
                 setMessage(errorMessage);
             } else {
                 setMessage(message);
+
+                (async () => {
+                    const { listener } = await getListener();
+
+                    console.log("No user data in session.");
+                    console.log(
+                        "Getting user for the profile icon: Origin-Server"
+                    );
+                    console.log(
+                        "Setting user in session storage for later use"
+                    );
+
+                    sessionStorage.removeItem("user");
+                    sessionStorage.setItem("user", JSON.stringify(listener));
+
+                    history.push("/account");
+                })();
             }
         }
     };
 
     useEffect(() => {
         (async () => {
-            const { listener } = await getListener(
-                firstName,
-                lastName,
-                birthday,
-                region,
-                imageRef
-            );
+            const listener = JSON.parse(sessionStorage.getItem("user"));
+
             if (listener) {
                 const { firstName, lastName, dob, region } = listener;
                 setFirstName(firstName);
@@ -58,7 +72,7 @@ export default function EditProfile() {
                 setRegion(region);
             }
 
-            console.log("Getting user from edit profile");
+            console.log("Getting user for edit profile: Origin-Session");
         })();
     }, []);
 

@@ -7,12 +7,23 @@ export default function Playlists({ shouldUpdate }) {
     const [playlists, setPlaylists] = React.useState([]);
 
     useEffect(() => {
-        (async () => {
-            const { playlist } = await getAllPlaylist();
-            setPlaylists(playlist);
+        const allPlaylist = JSON.parse(sessionStorage.getItem("playlists"));
+        console.log("Getting playlists for the sidebar: Origin-Session");
 
-            console.log("requesting playlist list from sidebar");
-        })();
+        if (!allPlaylist || allPlaylist === null) {
+            (async () => {
+                const { playlist } = await getAllPlaylist();
+                setPlaylists(playlist);
+
+                console.log("No playlists in session.");
+                console.log("Getting playlists for sidebar: Origin-server");
+                console.log("Setting playlists to session");
+
+                sessionStorage.setItem("playlists", JSON.stringify(playlist));
+            })();
+        } else {
+            setPlaylists(allPlaylist);
+        }
     }, [shouldUpdate]);
 
     const playlistsList = playlists

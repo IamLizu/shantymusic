@@ -22,14 +22,27 @@ export default function ProfileIcon() {
     useClickAway(outsideRef, () => setMenuVisibility("hidden"));
 
     useEffect(() => {
-        (async () => {
-            const { listener } = await getListener();
-            setUser(listener);
-        })();
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        console.log("Getting user for the profile icon: Origin-Session");
+
+        if (!user || user === null) {
+            (async () => {
+                const { listener } = await getListener();
+                setUser(listener);
+
+                console.log("No user data in session.");
+                console.log("Getting user for the profile icon: Origin-Server");
+                console.log("Setting user in session storage for later use");
+
+                sessionStorage.setItem("user", JSON.stringify(listener));
+            })();
+        } else {
+            setUser(user);
+        }
     }, []);
 
     return (
-        <div className="absolute left-0 m-5" ref={outsideRef}>
+        <div className="absolute left-0 m-5 px-8" ref={outsideRef}>
             <div
                 className="hover:shadow-2xl p-1 cursor-pointer flex items-center gap-2 rounded-r-full rounded-l-full pr-3 mb-5 bg-black opacity-90 hover:bg-opacity-80 text-white"
                 onClick={toggleMenu}
@@ -66,7 +79,7 @@ export default function ProfileIcon() {
                     <p className="profileMenuItem">Account</p>
                 </Link>
                 <hr className="opacity-50" />
-                <Link to="/account/subscriptions">
+                <Link to="/subscriptions">
                     <p className="profileMenuItem">Subscriptions</p>
                 </Link>
                 <hr className="opacity-50" />

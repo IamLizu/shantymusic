@@ -38,7 +38,7 @@ export default function Sidebar({ handleCreateVisiblity, shouldUpdate }) {
             </div>
             <hr className="opacity-25 mx-5" />
 
-            <div className="mx-10 overflow-auto h-1/3 lg:h-2/4 space-y-3">
+            <div className="mx-10 overflow-auto h-1/3 lg:h-96 space-y-3">
                 <Playlists shouldUpdate={shouldUpdate} />
             </div>
 

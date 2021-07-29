@@ -26,8 +26,6 @@ export default function Login() {
 
     useEffect(() => {
         setAuthToken(Cookies.get("Jwt-Token"));
-
-        console.log("Getting user type from cookies.");
     }, [authToken]);
 
     const loginHandler = async () => {
