@@ -20,7 +20,7 @@ export default function Sidebar() {
             <div className="space-y-3">
                 <Link to="/dashboard" className="sideBarItem">
                     <FaHome />
-                    <p>Dashboard</p>
+                    <p>Home</p>
                 </Link>
                 <hr className="opacity-20" />
 
