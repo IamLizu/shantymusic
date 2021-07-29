@@ -6,6 +6,7 @@ import React, {
     forwardRef,
 } from "react";
 import createPlaylist from "../../../handlers/listener/createPlaylist";
+import getAllPlaylist from "../../../handlers/listener/playlist/getAllPlaylist";
 
 const CreatePlayList = (props, ref) => {
     const [playlistName, setPlaylistName] = useState("name");
@@ -23,7 +24,20 @@ const CreatePlayList = (props, ref) => {
         if (message) {
             setPlaylistCreationMessage(message);
             setPlaylistName("");
-            props.handlePlaylistCreated();
+
+            (async () => {
+                const { playlist } = await getAllPlaylist();
+
+                console.log(
+                    "Getting new playlists for sidebar after create: Origin-server"
+                );
+                console.log("Setting playlists to session, after create");
+
+                sessionStorage.removeItem("playlists");
+                sessionStorage.setItem("playlists", JSON.stringify(playlist));
+
+                props.handlePlaylistCreated();
+            })();
         } else {
             setPlaylistCreationMessage(errorMessage);
         }

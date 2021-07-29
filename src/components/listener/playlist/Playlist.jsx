@@ -18,7 +18,9 @@ export default function Playlist({ match }) {
 
     const onDeletePlaylist = async () => {
         console.log(`Deleting playlist: ${match.params.id}`);
-        await deletePlaylist(match.params.id);
+        const { message } = await deletePlaylist(match.params.id);
+
+        if (message) sessionStorage.removeItem("playlists");
 
         history.push("/dashboard");
     };
@@ -32,7 +34,9 @@ export default function Playlist({ match }) {
         (async () => {
             const { playlist } = await getPlaylist(match.params.id);
             setPlaylist(playlist);
-            console.log("Fetching playlist from its dedicated page");
+            console.log(
+                `Getting playlist ${match.params.id} for its dedicated page: Origin-Server`
+            );
         })();
     }, [match]);
 
