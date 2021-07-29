@@ -79,7 +79,7 @@ export default function ProfileIcon() {
                     <p className="profileMenuItem">Account</p>
                 </Link>
                 <hr className="opacity-50" />
-                <Link to="/account/subscriptions">
+                <Link to="/subscriptions">
                     <p className="profileMenuItem">Subscriptions</p>
                 </Link>
                 <hr className="opacity-50" />

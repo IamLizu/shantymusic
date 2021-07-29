@@ -11,6 +11,7 @@ import Account from "./components/listener/account/Account";
 import ChangePassword from "./components/ChangePassword";
 import EditProfile from "./components/listener/account/EditProfile";
 import Playlist from "./components/listener/playlist/Playlist";
+import Subscriptions from "./components/Subscriptions";
 
 function App() {
     return (
@@ -53,6 +54,11 @@ function App() {
                         exact
                         path="/playlist/:id"
                         component={Playlist}
+                    />
+                    <ProtectedRoute
+                        exact
+                        path="/subscriptions"
+                        component={Subscriptions}
                     />
                     <Route exact path="/verify" component={EmailVerify} />
                 </Switch>

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaHome, FaLock, FaUser, FaUserEdit } from "react-icons/fa";
+import { FaHome, FaLock, FaUser, FaUserEdit, FaWallet } from "react-icons/fa";
 
 export default function Sidebar() {
     const userImage = JSON.parse(sessionStorage.getItem("user"))
@@ -39,6 +39,12 @@ export default function Sidebar() {
                 <Link to="/account/change-password" className="sideBarItem">
                     <FaLock />
                     <p>Change password</p>
+                </Link>
+
+                <hr className="opacity-20" />
+                <Link to="/subscriptions" className="sideBarItem">
+                    <FaWallet />
+                    <p>Subscriptions</p>
                 </Link>
             </div>
         </div>
