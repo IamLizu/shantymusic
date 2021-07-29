@@ -1,18 +1,16 @@
 import React, { useState, useEffect } from "react";
 import setPageTitle from "../../../setPageTitle";
 import Sidebar from "../Sidebar";
-import { useLastLocation } from "react-router-last-location";
 
 export default function Account() {
     setPageTitle("Account Overview | Shanty Music");
 
     const [user, setUser] = useState(null);
-    const history = useLastLocation();
 
     useEffect(() => {
         setUser(JSON.parse(sessionStorage.getItem("user")));
         console.log("Getting user for account overview: Origin-Session");
-    }, [history.pathname]);
+    }, []);
 
     return (
         <div className="grid grid-cols-5 mx-auto container">
