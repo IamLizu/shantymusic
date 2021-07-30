@@ -40,10 +40,12 @@ export default function Default({ title, children }) {
 
     return Cookies.get("type") === "listener" ? (
         <>
-            <ProfileIcon />
-
             <div className="mainGridCol5">
-                <div className="mainGridChild">
+                <div className="z-50 absolute">
+                    <ProfileIcon />
+                </div>
+
+                <div className="mainGridChild z-10">
                     <div
                         className={`${createPlayListVisibiity}`}
                         ref={outsideRef}

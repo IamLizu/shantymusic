@@ -65,7 +65,7 @@ export default function Playlist({ match }) {
                     <FaPlayCircle className="w-20 h-20 opacity-70 hover:opacity-80 cursor-pointer" />
 
                     <button
-                        className="text-6xl text-gray-900 opacity-80 hover:opacity-90 cursor-pointer"
+                        className="text-6xl  opacity-80 hover:opacity-90 cursor-pointer"
                         onClick={contextMenuToggler}
                     >
                         ···
