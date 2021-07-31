@@ -10,6 +10,7 @@ import {
     FaStoreAlt,
 } from "react-icons/fa";
 import Playlists from "./listener/playlist/Playlists";
+import { Link } from "react-router-dom";
 
 export default function Sidebar({ handleCreateVisiblity, shouldUpdate }) {
     return (
@@ -19,14 +20,14 @@ export default function Sidebar({ handleCreateVisiblity, shouldUpdate }) {
                 <img src={shantyText} alt="Shanty Music" width="100" />
             </div>
             <div className="space-y-3">
-                <div className="sideBarItem">
+                <Link to="/dashboard" className="sideBarItem">
                     <FaHome />
                     <p>Home</p>
-                </div>
-                <div className="sideBarItem">
+                </Link>
+                <Link to="/search" className="sideBarItem">
                     <FaSearch />
                     <p>Search</p>
-                </div>
+                </Link>
                 <div className="sideBarItem">
                     <FaStoreAlt />
                     <p>Marketplace</p>
