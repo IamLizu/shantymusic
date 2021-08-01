@@ -12,6 +12,7 @@ import ChangePassword from "./components/ChangePassword";
 import EditProfile from "./components/listener/account/EditProfile";
 import Playlist from "./components/listener/playlist/Playlist";
 import Subscriptions from "./components/Subscriptions";
+import Logout from "./components/Logout";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
             <Router>
                 <Switch>
                     <Route exact path="/" component={Login} />
+                    <ProtectedRoute exact path="/logout" component={Logout} />
                     <Route
                         exact
                         path="/reset-password"
