@@ -15,5 +15,7 @@ export const imageTypeSetter = () => {
 export const shortString = (string, sizeInChar) => {
     if (string.length > sizeInChar) {
         return string.substring(0, sizeInChar) + "...";
+    } else {
+        return string;
     }
 };
