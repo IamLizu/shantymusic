@@ -1,13 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
-import Sidebar from "../Sidebar";
-import setPageTitle from "../../../setPageTitle";
 import editProfile from "../../../handlers/listener/editProfile";
 import getListener from "../../../handlers/getListener";
 import { useHistory } from "react-router-dom";
+import Profile from "../layouts/Profile";
 
 export default function EditProfile() {
-    setPageTitle("Edit Profile | Shanty Music");
-
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [birthday, setBirthday] = useState("");
@@ -77,10 +74,8 @@ export default function EditProfile() {
     }, []);
 
     return (
-        <div className="grid grid-cols-5 mx-auto container">
-            <Sidebar />
-
-            <div className="p-10 shadow-sm col-span-4 my-10 space-y-6 rounded-md">
+        <Profile title="Edit Profile">
+            <div className="space-y-6 ">
                 <h2 className="text-4xl font-bold text-gray-900">
                     Edit Profile
                 </h2>
@@ -119,6 +114,6 @@ export default function EditProfile() {
                     Update
                 </button>
             </div>
-        </div>
+        </Profile>
     );
 }

@@ -1,11 +1,8 @@
 import React from "react";
-import Sidebar from "./listener/Sidebar";
-import setPageTitle from "../setPageTitle";
 import { FaCheck } from "react-icons/fa";
+import Profile from "./listener/layouts/Profile";
 
 export default function Subscriptions() {
-    setPageTitle("Subscriptions | Shanty Music");
-
     const packages = [
         {
             name: "Free",
@@ -60,14 +57,12 @@ export default function Subscriptions() {
     ));
 
     return (
-        <div className="grid grid-cols-5 mx-auto container">
-            <Sidebar />
-
-            <div className="p-10 shadow-sm col-span-4 my-10 space-y-6 rounded-md mt-48">
-                <div className="flex gap-16 justify-center divide-blue-500">
+        <Profile title="Subscriptions">
+            <div className="space-y-6">
+                <div className="flex flex-col lg:flex-row gap-16 justify-center divide-blue-500">
                     {subscriptionsBlock}
                 </div>
             </div>
-        </div>
+        </Profile>
     );
 }

@@ -41,9 +41,9 @@ export default function Profile({ title, children }) {
     }, []);
 
     return (
-        <div className="flex lg:mx-auto lg:container mx-10">
+        <div className="grid lg:mx-auto lg:container mx-10">
             <div
-                className={`${sidebarVisibility} w-full sm:w-64 bg-black bg-opacity-90 h-screen right-0 absolute text-gray-100 space-y-6 py-5`}
+                className={`${sidebarVisibility} fixed w-full sm:w-64 bg-black bg-opacity-90 h-screen right-0 text-gray-100 space-y-6 py-5`}
             >
                 <Sidebar setSidebarVisibility={toggleSidebar} />
             </div>

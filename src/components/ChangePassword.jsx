@@ -1,11 +1,8 @@
 import React from "react";
-import Sidebar from "./listener/Sidebar";
-import setPageTitle from "../setPageTitle";
 import changePassword from "../handlers/changePassword";
+import Profile from "./listener/layouts/Profile";
 
 export default function ChangePassword() {
-    setPageTitle("Change password | Shanty Music");
-
     const [password, setPassword] = React.useState("");
     const [confirmPassword, setConfirmPassword] = React.useState("");
     const [oldPassword, setOldPassword] = React.useState("");
@@ -48,10 +45,8 @@ export default function ChangePassword() {
     };
 
     return (
-        <div className="grid grid-cols-5 mx-auto container">
-            <Sidebar />
-
-            <div className="p-10 shadow-sm col-span-4 my-10 space-y-6 rounded-md">
+        <Profile title="Change Password">
+            <div className="space-y-6 ">
                 <h2 className="text-4xl font-bold text-gray-900">
                     Change your password
                 </h2>
@@ -85,6 +80,6 @@ export default function ChangePassword() {
                     Change
                 </button>
             </div>
-        </div>
+        </Profile>
     );
 }
