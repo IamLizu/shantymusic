@@ -10,35 +10,15 @@ import {
     FaWallet,
 } from "react-icons/fa";
 
-export default function Sidebar({ setSidebarVisibility }) {
+export default function Sidebar({ closeButtonVisibility, toggleSidebar }) {
     const userImage = JSON.parse(sessionStorage.getItem("user"))
         .profileImageUrl;
-
-    const [closeButtonVisibility, setCloseButtonVisibility] = React.useState(
-        "hidden"
-    );
-
-    const handleWindowResize = () => {
-        if (window.innerWidth < 640) {
-            setCloseButtonVisibility("visible");
-        } else {
-            setCloseButtonVisibility("hidden");
-        }
-    };
-
-    React.useEffect(() => {
-        window.addEventListener("resize", handleWindowResize);
-
-        return () => {
-            window.removeEventListener("resize", handleWindowResize);
-        };
-    }, []);
 
     return (
         <>
             <div
                 className={`float-right px-5 cursor-pointer ${closeButtonVisibility}`}
-                onClick={setSidebarVisibility}
+                onClick={toggleSidebar}
             >
                 <FaTimes />
             </div>
@@ -86,5 +66,6 @@ export default function Sidebar({ setSidebarVisibility }) {
 }
 
 Sidebar.propTypes = {
-    setSidebarVisibility: PropTypes.func,
+    closeButtonVisibility: PropTypes.string.isRequired,
+    toggleSidebar: PropTypes.func.isRequired,
 };

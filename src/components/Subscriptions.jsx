@@ -59,7 +59,7 @@ export default function Subscriptions() {
     return (
         <Profile title="Subscriptions">
             <div className="space-y-6">
-                <div className="flex flex-col lg:flex-row gap-16 justify-center divide-blue-500">
+                <div className="flex flex-col lg:flex-row gap-10 justify-center divide-blue-500">
                     {subscriptionsBlock}
                 </div>
             </div>
