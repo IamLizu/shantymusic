@@ -58,7 +58,7 @@ export default function Default({ title, children }) {
 
                     <main>{children}</main>
                 </div>
-                <div className="sidebar">
+                <div className="sidebar z-20">
                     <Sidebar
                         handleCreateVisiblity={handleCreateVisiblity}
                         shouldUpdate={playListCreated}
