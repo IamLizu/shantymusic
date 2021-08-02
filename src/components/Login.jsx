@@ -47,10 +47,8 @@ export default function Login() {
                 sessionStorage.removeItem("user");
                 sessionStorage.removeItem("playlists");
 
-                let date = new Date();
-                date.setDate(date.getTime() + 30 * 60 * 1000);
-                document.cookie = `Jwt-Token=${token}; expires=${date.toUTCString()};`;
-                document.cookie = `type=${type}; expires=${date.toUTCString()};`;
+                document.cookie = `Jwt-Token=${token}; max-age=3600;`;
+                document.cookie = `type=${type}; max-age=3600;`;
 
                 history.push("dashboard");
             }
