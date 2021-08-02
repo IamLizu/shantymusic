@@ -44,13 +44,8 @@ export default function Login() {
             }
 
             if (token !== null && token !== undefined) {
-                sessionStorage.removeItem("user");
-                sessionStorage.removeItem("playlists");
-
-                let date = new Date();
-                date.setDate(date.getTime() + 30 * 60 * 1000);
-                document.cookie = `Jwt-Token=${token}; expires=${date.toUTCString()};`;
-                document.cookie = `type=${type}; expires=${date.toUTCString()};`;
+                document.cookie = `Jwt-Token=${token}; max-age=36000;`;
+                document.cookie = `type=${type}; max-age=36000;`;
 
                 history.push("dashboard");
             }

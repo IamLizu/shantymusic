@@ -1,13 +1,27 @@
+import PropTypes from "prop-types";
 import React from "react";
 import { Link } from "react-router-dom";
-import { FaHome, FaLock, FaUser, FaUserEdit, FaWallet } from "react-icons/fa";
+import {
+    FaHome,
+    FaLock,
+    FaTimes,
+    FaUser,
+    FaUserEdit,
+    FaWallet,
+} from "react-icons/fa";
 
-export default function Sidebar() {
+export default function Sidebar({ closeButtonVisibility, toggleSidebar }) {
     const userImage = JSON.parse(sessionStorage.getItem("user"))
         .profileImageUrl;
 
     return (
-        <div className="w-64 bg-black bg-opacity-90 h-screen right-0 absolute text-gray-100 space-y-6 col-span-1 py-5">
+        <>
+            <div
+                className={`float-right px-5 cursor-pointer ${closeButtonVisibility}`}
+                onClick={toggleSidebar}
+            >
+                <FaTimes />
+            </div>
             <div className="flex justify-center">
                 <img
                     src={userImage}
@@ -47,6 +61,11 @@ export default function Sidebar() {
                     <p>Subscriptions</p>
                 </Link>
             </div>
-        </div>
+        </>
     );
 }
+
+Sidebar.propTypes = {
+    closeButtonVisibility: PropTypes.string.isRequired,
+    toggleSidebar: PropTypes.func.isRequired,
+};

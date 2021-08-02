@@ -12,6 +12,11 @@ export default function ProfileIcon() {
 
     const logoutHandler = () => {
         Cookies.remove("Jwt-Token");
+        Cookies.remove("type");
+
+        sessionStorage.removeItem("user");
+        sessionStorage.removeItem("playlists");
+
         history.push("/");
     };
 
