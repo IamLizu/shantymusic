@@ -22,7 +22,10 @@ export default function Profile({ title, children }) {
     );
     const [playListCreated, setPlayListCreated] = useState(0);
 
-    const handleCreateVisiblity = () => setCreatePlayListVisibiity("visibile");
+    const handleCreateVisiblity = () => {
+        setCreatePlayListVisibiity("visibile");
+        handleWindowResize();
+    };
     const handlePlaylistCreated = () => {
         setPlayListCreated(playListCreated + 1);
         setCreatePlayListVisibiity("hidden");
