@@ -47,7 +47,7 @@ export default function ProfileIcon() {
     }, []);
 
     return (
-        <div className="left-0 m-5 px-8" ref={outsideRef}>
+        <div className="left-0 mx-4 py-10" ref={outsideRef}>
             <div
                 className="hover:shadow-2xl p-1 cursor-pointer flex items-center gap-2 rounded-r-full rounded-l-full pr-3 mb-5 bg-black opacity-90 hover:bg-opacity-80 text-white"
                 onClick={toggleMenu}

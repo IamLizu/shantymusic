@@ -7,6 +7,7 @@ import Player from "../../Player";
 import Cookies from "js-cookie";
 import { useClickAway } from "react-use";
 import CreatePlayList from "../../listener/playlist/CreatePlayList";
+import ProfileIcon from "../../ProfileIcon";
 
 export default function Profile({ title, children }) {
     setPageTitle(`${title} | Shanty Music`);
@@ -87,6 +88,10 @@ export default function Profile({ title, children }) {
 
     return Cookies.get("type") === "listener" ? (
         <div className="grid px-10 h-screen bg-black bg-opacity-80 text-gray-100">
+            <div className="absolute">
+                <ProfileIcon />
+            </div>
+
             <div
                 className={`${sidebarVisibility} fixed w-full sm:w-64 bg-black bg-opacity-90 h-screen right-0 text-gray-100 space-y-6 py-5`}
             >
@@ -102,7 +107,7 @@ export default function Profile({ title, children }) {
                 className={`${mainDivVisibility} xs:px-5 sm:px-10 py-10 my-10 space-y-6 w-full sm:w-2/3 md:w-4/5 `}
             >
                 <button
-                    className={`float-right ${menuButtonVisibility}`}
+                    className={`float-right -mt-5 ${menuButtonVisibility}`}
                     onClick={toggleSidebar}
                 >
                     <FaBars />
