@@ -1,10 +1,10 @@
 import React from "react";
-import Default from "./listener/layouts/Default";
+import Main from "./listener/layouts/Main";
 
 export default function Dashboard() {
     return (
-        <Default title="Dashboard">
+        <Main title="Dashboard">
             <p>this is Dashboard</p>
-        </Default>
+        </Main>
     );
 }

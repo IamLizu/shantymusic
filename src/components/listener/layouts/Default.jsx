@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useRef, useState, useEffect } from "react";
 import setPageTitle from "../../../setPageTitle";
-import Player from "../../Payer";
+import Player from "../../Player";
 import Sidebar from "../../Sidebar";
 import ProfileIcon from "../../ProfileIcon";
 import CreatePlayList from "../../listener/playlist/CreatePlayList";

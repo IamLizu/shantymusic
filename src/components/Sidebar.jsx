@@ -8,13 +8,26 @@ import {
     FaPlus,
     FaSearch,
     FaStoreAlt,
+    FaTimes,
 } from "react-icons/fa";
 import Playlists from "./listener/playlist/Playlists";
 import { Link } from "react-router-dom";
 
-export default function Sidebar({ handleCreateVisiblity, shouldUpdate }) {
+export default function Sidebar({
+    handleCreateVisiblity,
+    shouldUpdate,
+    toggleSidebar,
+    closeButtonVisibility,
+}) {
     return (
-        <div className="w-64 bg-black bg-opacity-90 h-screen right-0 top-0 absolute text-gray-100 space-y-6">
+        <div className="w-full sm:w-64 py-10 bg-black bg-opacity-90 h-screen right-0 top-0 absolute text-gray-100 space-y-6">
+            <div
+                className={`float-right px-5 cursor-pointer ${closeButtonVisibility}`}
+                onClick={toggleSidebar}
+            >
+                <FaTimes />
+            </div>
+
             <div className="flex justify-center my-3">
                 <img src={shantyLogo} alt="Shanty Music" width="55" />
                 <img src={shantyText} alt="Shanty Music" width="100" />
@@ -54,6 +67,8 @@ export default function Sidebar({ handleCreateVisiblity, shouldUpdate }) {
 }
 
 Sidebar.propTypes = {
+    closeButtonVisibility: PropTypes.string,
     handleCreateVisiblity: PropTypes.func.isRequired,
     shouldUpdate: PropTypes.number,
+    toggleSidebar: PropTypes.function,
 };
