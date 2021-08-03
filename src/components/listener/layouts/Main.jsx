@@ -87,7 +87,7 @@ export default function Profile({ title, children }) {
     }, []);
 
     return Cookies.get("type") === "listener" ? (
-        <div className="grid px-10 h-screen bg-black bg-opacity-80 text-gray-100">
+        <div className="grid px-10 h-full bg-black bg-opacity-80 text-gray-100">
             <div className="absolute">
                 <ProfileIcon />
             </div>

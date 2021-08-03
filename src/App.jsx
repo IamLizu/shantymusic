@@ -13,6 +13,7 @@ import EditProfile from "./components/listener/account/EditProfile";
 import Playlist from "./components/listener/playlist/Playlist";
 import Subscriptions from "./components/Subscriptions";
 import Logout from "./components/Logout";
+import Search from "./components/Search";
 
 function App() {
     return (
@@ -21,6 +22,7 @@ function App() {
                 <Switch>
                     <Route exact path="/" component={Login} />
                     <ProtectedRoute exact path="/logout" component={Logout} />
+                    <ProtectedRoute exact path="/search" component={Search} />
                     <Route
                         exact
                         path="/reset-password"
