@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useRef } from "react";
 import getPlaylist from "../../../handlers/listener/playlist/getPlaylist";
-import Default from "../layouts/Default";
+import Main from "../layouts/Main";
 import { FaPlayCircle } from "react-icons/fa";
 import deletePlaylist from "../../../handlers/listener/playlist/deletePlaylist";
 import { useClickAway } from "react-use";
@@ -20,6 +20,7 @@ export default function Playlist({ match }) {
     ] = React.useState("hidden");
     const [updatedPlaylistName, setUpdatedPlaylistName] = React.useState("0");
     const [message, setMessage] = React.useState("");
+    const [spanVisibility, setSpanVisibility] = React.useState("visible");
 
     const onPlaylistNameChange = (e) => setUpdatedPlaylistName(e.target.value);
 
@@ -29,6 +30,10 @@ export default function Playlist({ match }) {
         );
 
         setPlaylistNameVisibility((value) =>
+            value === "visible" ? "hidden" : "visible"
+        );
+
+        setSpanVisibility((value) =>
             value === "visible" ? "hidden" : "visible"
         );
 
@@ -74,6 +79,7 @@ export default function Playlist({ match }) {
     useClickAway(outsideRef2, () => {
         setPlaylistNameVisibility("visible");
         setUpdatePlaylistVisibility("hidden");
+        setSpanVisibility("visible");
     });
 
     useEffect(() => {
@@ -88,32 +94,42 @@ export default function Playlist({ match }) {
     }, [match]);
 
     return playlist ? (
-        <Default title={`${playlist.playlistName} | Playlist`}>
+        <Main title={`${playlist.playlistName} | Playlist`}>
             <>
-                <div className="flex gap-6 items-end">
+                <div className="lg:flex gap-6 items-end">
                     <img
                         src={playlist.playlistImageUrl}
-                        alt=""
-                        width="200"
-                        height="200"
+                        className="w-32 md:w-40 lg:w-48"
+                        alt={playlist.playlistName}
                     />
 
+                    <br />
+
                     <div className="space-y-3">
-                        <p
-                            className={`uppercase font-medium pl-1 ${playlistNameVisibility}`}
-                        >
-                            Playlist
-                        </p>
-                        <p className={`text-8xl ${playlistNameVisibility}`}>
-                            {playlist.playlistName}
-                        </p>
+                        <div className="flex gap-4 lg:flex-col lg:gap-0">
+                            <p
+                                className={`uppercase md:text-2xl  lg:font-medium lg:pl-1 ${playlistNameVisibility}`}
+                            >
+                                Playlist
+                            </p>
+                            <span
+                                className={`${spanVisibility} md:text-2xl  lg:hidden`}
+                            >
+                                /
+                            </span>
+                            <p
+                                className={`md:text-2xl lg:text-8xl font-medium lg:font-normal ${playlistNameVisibility}`}
+                            >
+                                {playlist.playlistName}
+                            </p>
+                        </div>
                         <div
                             ref={outsideRef2}
-                            className={`space-y-3 ${updatePlaylistVisibility}`}
+                            className={`flex flex-col space-y-3 ${updatePlaylistVisibility}`}
                         >
                             <p className="text-sm">{message}</p>
                             <input
-                                className={`text-8xl`}
+                                className={`md:text-2xl lg:text-8xl w-4/5`}
                                 type="text"
                                 onChange={onPlaylistNameChange}
                                 value={
@@ -123,7 +139,7 @@ export default function Playlist({ match }) {
                                 }
                             />
                             <button
-                                className={`btnPrimary`}
+                                className={`btnPrimary w-28`}
                                 onClick={onPlaylistUpdate}
                             >
                                 Update
@@ -132,13 +148,11 @@ export default function Playlist({ match }) {
                     </div>
                 </div>
 
-                <br />
-
                 <div className="flexGap2 gap-6 mt-6">
-                    <FaPlayCircle className="w-20 h-20 opacity-70 hover:opacity-80 cursor-pointer" />
+                    <FaPlayCircle className="w-10 h-10 md:w-14 md:h-14 lg:w-20 lg:h-20 opacity-70 hover:opacity-80 cursor-pointer" />
 
                     <button
-                        className="text-6xl  opacity-80 hover:opacity-90 cursor-pointer"
+                        className="text-2xl md:text-4xl lg:text-6xl  opacity-80 hover:opacity-90 cursor-pointer"
                         onClick={contextMenuToggler}
                     >
                         ···
@@ -146,7 +160,7 @@ export default function Playlist({ match }) {
 
                     <div
                         ref={outsideRef}
-                        className={`${showPlaylistMenu} bg-gray-700 text-white p-2 py-2 space-y-2`}
+                        className={`${showPlaylistMenu} bg-gray-700 text-white p-2 py-2 space-y-2 text-sm lg:text-base`}
                     >
                         <p
                             className="profileMenuItem"
@@ -164,7 +178,7 @@ export default function Playlist({ match }) {
                     </div>
                 </div>
             </>
-        </Default>
+        </Main>
     ) : null;
 }
 
