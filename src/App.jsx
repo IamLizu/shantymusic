@@ -14,6 +14,7 @@ import Playlist from "./components/listener/playlist/Playlist";
 import Subscriptions from "./components/Subscriptions";
 import Logout from "./components/Logout";
 import Search from "./components/Search";
+import Album from "./components/Album";
 
 function App() {
     return (
@@ -59,6 +60,7 @@ function App() {
                         path="/playlist/:id"
                         component={Playlist}
                     />
+                    <ProtectedRoute exact path="/album/:id" component={Album} />
                     <ProtectedRoute
                         exact
                         path="/subscriptions"
