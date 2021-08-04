@@ -1,9 +1,12 @@
 import React from "react";
 import Main from "./listener/layouts/Main";
-import { shortString } from "../lib";
-import verifiedIcon from "../assets/images/right.png";
 import axios from "axios";
 import search from "../handlers/search";
+import getFavorites from "../handlers/listener/getFavorites";
+import getGlobalTop from "../handlers/listener/getGlobalTop";
+import SongMain from "./listener/layouts/SongMain";
+import AlbumMain from "./listener/layouts/AlbumMain";
+import ArtistMain from "./listener/layouts/ArtistMain";
 
 export default function Search() {
     const searchRef = React.useRef();
@@ -19,8 +22,17 @@ export default function Search() {
         ""
     );
     const [searchResult, setSearchResult] = React.useState({});
+    const [favorites, setFavorites] = React.useState([]);
+    const [globalTop, setGlobalTop] = React.useState([]);
+    const [defaultStuffVisibility, setDefaultStuffVisibility] = React.useState(
+        "visible"
+    );
+    const [message, setMessage] = React.useState("");
 
-    const onInputChange = (event) => setSearchTerm(event.target.value);
+    const onInputChange = (event) => {
+        setMessage("");
+        setSearchTerm(event.target.value);
+    };
 
     const handleWindowResize = () => {
         if (window.innerWidth < 768) {
@@ -35,6 +47,40 @@ export default function Search() {
     };
 
     React.useEffect(() => {
+        const allFavorites = JSON.parse(sessionStorage.getItem("favorites"));
+        const globalTops = JSON.parse(sessionStorage.getItem("globalTops"));
+        console.log(
+            "Getting favorites, global tops for the serach: Origin-Session"
+        );
+
+        if (
+            !allFavorites ||
+            allFavorites === null ||
+            !globalTops ||
+            globalTops === null
+        ) {
+            (async () => {
+                const { favorites } = await getFavorites();
+                const { globalTop } = await getGlobalTop();
+                setFavorites(favorites);
+                setGlobalTop(globalTop);
+
+                console.log("No favorites, global tops in session.");
+                console.log(
+                    "Getting favorites, global tops for sidebar: Origin-server"
+                );
+                console.log("Setting favorites, global tops to session");
+
+                sessionStorage.setItem("favorites", JSON.stringify(favorites));
+                sessionStorage.setItem("globalTops", JSON.stringify(globalTop));
+            })();
+        } else {
+            setFavorites(allFavorites);
+            setGlobalTop(globalTops);
+        }
+
+        setDefaultStuffVisibility("visible");
+
         searchRef.current.focus();
 
         window.addEventListener("resize", handleWindowResize);
@@ -49,139 +95,51 @@ export default function Search() {
         let source = axios.CancelToken.source();
 
         setTimeout(() => {
-            if (searchTerm.length > 0) {
-                console.log("Searching:", searchTerm);
-
+            if (searchTerm.length > 0 && searchTerm !== "") {
+                setMessage(
+                    "Please wait while your request is being processed."
+                );
                 if (mounted) {
                     (async () => {
-                        const { searchResult } = await search(
+                        const { searchResult, errorMessage } = await search(
                             searchTerm,
                             source
                         );
 
-                        console.log(searchResult);
-                        setSearchResult(searchResult);
+                        if (searchResult) {
+                            console.log(searchResult);
+                            setSearchResult(searchResult);
+                            setDefaultStuffVisibility("hidden");
+                            setMessage("");
+                        } else {
+                            setSearchResult({});
+                            setDefaultStuffVisibility("visible");
+                            setMessage(errorMessage);
+                        }
                     })();
                 }
             }
         }, 500);
 
         return () => {
+            setDefaultStuffVisibility("visible");
+
             mounted = false;
             source.cancel();
         };
     }, [searchTerm]);
 
-    const searchResultBlockSong = (data) =>
-        data && data.length > 0 ? (
-            <>
-                <h3 className="text-3xl font-semibold">Songs</h3>
-                <hr className="opacity-50" />
-
-                <div className="flex flex-col md:flex-wrap md:flex-row gap-6 filter drop-shadow-md">
-                    {data.map((item, index) => (
-                        <div
-                            key={index}
-                            className="p-5 md:w-44 lg:w-48 bg-black bg-opacity-30 rounded-md hover:bg-opacity-50 cursor-pointer flex flex-row md:flex-col gap-3 items-center md:items-baseline"
-                        >
-                            <img
-                                src={item.coverImageUrl}
-                                alt=""
-                                className="w-16 h-16 md:w-40 md:h-40 rounded-sm pb-2"
-                            />
-
-                            <div className={flexClassesVisibility}>
-                                <p className={`${fullNameVisibility}`}>
-                                    {item.songName}
-                                </p>
-                                <p className={`${shortNameVisibility}`}>
-                                    {shortString(item.songName, 20)}
-                                </p>
-                                <p>{item.artistName}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </>
-        ) : null;
-
-    const searchResultBlockAlbum = (data) =>
-        data && data.length > 0 ? (
-            <>
-                <h3 className="text-3xl font-semibold">Albums</h3>
-                <hr className="opacity-50" />
-
-                <div className="flex flex-col md:flex-wrap md:flex-row gap-6 filter drop-shadow-md">
-                    {data.map((item, index) => (
-                        <div
-                            key={index}
-                            className="p-5 md:w-44 lg:w-48 bg-black bg-opacity-30 rounded-md hover:bg-opacity-50 cursor-pointer flex flex-row md:flex-col gap-3 items-center md:items-baseline"
-                        >
-                            <img
-                                src={item.coverImageUrl}
-                                alt=""
-                                className="w-16 h-16 md:w-40 md:h-40 rounded-sm pb-2"
-                            />
-                            <div className={flexClassesVisibility}>
-                                <p className={`${fullNameVisibility}`}>
-                                    {item.albumName}
-                                </p>
-                                <p className={`${shortNameVisibility}`}>
-                                    {shortString(item.albumName, 20)}
-                                </p>
-                                <p>{item.year}</p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </>
-        ) : null;
-
-    const searchResultBlockArtist = (data) =>
-        data && data.length > 0 ? (
-            <>
-                <h3 className="text-3xl font-semibold">Artists</h3>
-                <hr className="opacity-50" />
-
-                <div className="flex flex-col md:flex-wrap md:flex-row gap-6 filter drop-shadow-md">
-                    {data.map((item, index) => (
-                        <div
-                            key={index}
-                            className="p-5 md:w-44 lg:w-48 bg-black bg-opacity-30 rounded-md hover:bg-opacity-50 cursor-default flex flex-row md:flex-col gap-3 items-center"
-                        >
-                            <img
-                                src={item.profileImageUrl}
-                                alt=""
-                                className="w-18 h-16 md:w-40 md:h-40 rounded-full pb-2"
-                            />
-                            <div className="flex gap-3 items-center justify-center">
-                                <p className={`${fullNameVisibility}`}>
-                                    {`${item.firstName} ${item.lastName}`}
-                                </p>
-                                <p className={`${shortNameVisibility}`}>
-                                    {shortString(
-                                        `${item.firstName} ${item.lastName}`,
-                                        item.isVerified === "true" ? 12 : 20
-                                    )}
-                                </p>
-                                {item.isVerified === "true" ? (
-                                    <img
-                                        src={verifiedIcon}
-                                        alt=""
-                                        className="w-5 h-5"
-                                    />
-                                ) : null}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </>
-        ) : null;
-
     return (
         <Main title="Search">
             <div className={`md:w-5/6 xl:w-full pr-10 sm:pl-0`}>
-                <h2 className="text-4xl">Search</h2>
+                <h2 className="text-5xl">Search</h2>
+                {message ? (
+                    <>
+                        <br />
+                        <p>{message}</p>
+                    </>
+                ) : null}
+
                 <br />
                 <input
                     type="text"
@@ -192,14 +150,52 @@ export default function Search() {
                 />
 
                 {searchResult ? (
-                    <div className="space-y-6 my-10" id="resultBlock">
-                        {searchResultBlockSong(searchResult.songGetModels)}
-                        {searchResultBlockAlbum(searchResult.albumGetModels)}
-                        {searchResultBlockArtist(
-                            searchResult.artistGetInfoModels
-                        )}
+                    <div className="space-y-6 my-10">
+                        <SongMain
+                            data={searchResult.songGetModels}
+                            flexClassesVisibility={flexClassesVisibility}
+                            fullNameVisibility={fullNameVisibility}
+                            shortNameVisibility={shortNameVisibility}
+                        />
+                        <AlbumMain
+                            data={searchResult.albumGetModels}
+                            flexClassesVisibility={flexClassesVisibility}
+                            fullNameVisibility={fullNameVisibility}
+                            shortNameVisibility={shortNameVisibility}
+                        />
+                        <ArtistMain
+                            data={searchResult.artistGetInfoModels}
+                            fullNameVisibility={fullNameVisibility}
+                            shortNameVisibility={shortNameVisibility}
+                        />
                     </div>
                 ) : null}
+
+                <div className={defaultStuffVisibility}>
+                    {favorites ? (
+                        <div className="space-y-6 my-10">
+                            <SongMain
+                                data={favorites.songGetModels}
+                                title="Favorites"
+                                flexClassesVisibility={flexClassesVisibility}
+                                fullNameVisibility={fullNameVisibility}
+                                shortNameVisibility={shortNameVisibility}
+                            />
+                        </div>
+                    ) : null}
+
+                    {globalTop ? (
+                        <div className="space-y-6 my-10">
+                            <SongMain
+                                data={globalTop.songGetModels}
+                                title="Global Top"
+                                flexClassesVisibility={flexClassesVisibility}
+                                fullNameVisibility={fullNameVisibility}
+                                shortNameVisibility={shortNameVisibility}
+                            />
+                        </div>
+                    ) : null}
+                </div>
             </div>
         </Main>
     );
