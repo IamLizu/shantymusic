@@ -67,7 +67,7 @@ export default function Search() {
 
                 console.log("No favorites, global tops in session.");
                 console.log(
-                    "Getting favorites, global tops for sidebar: Origin-server"
+                    "Getting favorites, global tops for search: Origin-server"
                 );
                 console.log("Setting favorites, global tops to session");
 
@@ -150,7 +150,7 @@ export default function Search() {
                 />
 
                 {searchResult ? (
-                    <div className="space-y-6 my-10">
+                    <>
                         <SongMain
                             data={searchResult.songGetModels}
                             flexClassesVisibility={flexClassesVisibility}
@@ -168,12 +168,12 @@ export default function Search() {
                             fullNameVisibility={fullNameVisibility}
                             shortNameVisibility={shortNameVisibility}
                         />
-                    </div>
+                    </>
                 ) : null}
 
                 <div className={defaultStuffVisibility}>
                     {favorites ? (
-                        <div className="space-y-6 my-10">
+                        <>
                             <SongMain
                                 data={favorites.songGetModels}
                                 title="Favorites"
@@ -181,11 +181,11 @@ export default function Search() {
                                 fullNameVisibility={fullNameVisibility}
                                 shortNameVisibility={shortNameVisibility}
                             />
-                        </div>
+                        </>
                     ) : null}
 
                     {globalTop ? (
-                        <div className="space-y-6 my-10">
+                        <>
                             <SongMain
                                 data={globalTop.songGetModels}
                                 title="Global Top"
@@ -193,7 +193,7 @@ export default function Search() {
                                 fullNameVisibility={fullNameVisibility}
                                 shortNameVisibility={shortNameVisibility}
                             />
-                        </div>
+                        </>
                     ) : null}
                 </div>
             </div>

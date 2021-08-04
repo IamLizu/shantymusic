@@ -15,6 +15,7 @@ export default function Logout() {
         sessionStorage.removeItem("playlists");
         sessionStorage.removeItem("favorites");
         sessionStorage.removeItem("globalTops");
+        sessionStorage.removeItem("recommendations");
 
         history.push("/");
     };

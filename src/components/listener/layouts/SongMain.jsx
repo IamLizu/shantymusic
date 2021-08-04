@@ -10,7 +10,7 @@ export default function SongMain({
     shortNameVisibility,
 }) {
     return data && data.length > 0 ? (
-        <>
+        <div className="space-y-6 my-10">
             <h3 className="text-3xl font-semibold">
                 {title ? title : "Songs"}
             </h3>
@@ -40,12 +40,12 @@ export default function SongMain({
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     ) : null;
 }
 
 SongMain.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
     flexClassesVisibility: PropTypes.string,
     fullNameVisibility: PropTypes.string,
     shortNameVisibility: PropTypes.string,

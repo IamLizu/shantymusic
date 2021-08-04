@@ -10,7 +10,7 @@ export default function AlbumMain({
     shortNameVisibility,
 }) {
     return data && data.length > 0 ? (
-        <>
+        <div className="space-y-6 my-10">
             <h3 className="text-3xl font-semibold">
                 {title ? title : "Albums"}
             </h3>
@@ -39,12 +39,12 @@ export default function AlbumMain({
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     ) : null;
 }
 
 AlbumMain.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
     flexClassesVisibility: PropTypes.string,
     fullNameVisibility: PropTypes.string,
     shortNameVisibility: PropTypes.string,

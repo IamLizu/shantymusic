@@ -9,7 +9,7 @@ export default function ArtistMain({
     shortNameVisibility,
 }) {
     return data && data.length > 0 ? (
-        <>
+        <div className="space-y-6 my-10">
             <h3 className="text-3xl font-semibold">Artists</h3>
             <hr className="opacity-50" />
 
@@ -45,12 +45,12 @@ export default function ArtistMain({
                     </div>
                 ))}
             </div>
-        </>
+        </div>
     ) : null;
 }
 
 ArtistMain.propTypes = {
-    data: PropTypes.object.isRequired,
+    data: PropTypes.array.isRequired,
     fullNameVisibility: PropTypes.string,
     shortNameVisibility: PropTypes.string,
 };

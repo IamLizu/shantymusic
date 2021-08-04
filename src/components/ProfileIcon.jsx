@@ -18,6 +18,7 @@ export default function ProfileIcon() {
         sessionStorage.removeItem("playlists");
         sessionStorage.removeItem("favorites");
         sessionStorage.removeItem("globalTops");
+        sessionStorage.removeItem("recommendations");
 
         history.push("/");
     };
