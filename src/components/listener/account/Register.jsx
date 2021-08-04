@@ -149,7 +149,7 @@ export default function Register() {
                         onChange={emailInputHandler}
                     />
                     <input
-                        type="password"
+                        type="text"
                         placeholder="Password"
                         onChange={passwordInputHandler}
                     />
@@ -208,9 +208,12 @@ export default function Register() {
 
                         <span>/</span>
 
-                        <a href="#" className="font-medium defaultLink">
+                        <Link
+                            to="/reset-password"
+                            className="font-medium defaultLink"
+                        >
                             Forgot Password
-                        </a>
+                        </Link>
                     </p>
 
                     <p className="text-center">
