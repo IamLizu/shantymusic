@@ -13,6 +13,8 @@ export default function Logout() {
 
         sessionStorage.removeItem("user");
         sessionStorage.removeItem("playlists");
+        sessionStorage.removeItem("favorites");
+        sessionStorage.removeItem("globalTops");
 
         history.push("/");
     };
