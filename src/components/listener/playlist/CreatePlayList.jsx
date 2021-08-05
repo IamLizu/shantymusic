@@ -55,7 +55,7 @@ const CreatePlayList = (props, ref) => {
     }, []);
 
     return (
-        <div className="bg-gray-900 text-gray-100 p-5  rounded-md space-y-5 filter drop-shadow-2xl absolute -ml-3 w-3/4 sm:w-2/4 md:w-3/5 lg:w-4/6 xl:w-3/4 lg:ml-5">
+        <div className="bg-gray-900 text-gray-100 p-5 z-50 rounded-md space-y-5 filter drop-shadow-2xl absolute -ml-3 w-3/4 sm:w-2/4 md:w-3/5 lg:w-4/6 xl:w-3/4 lg:ml-5">
             <h3 className="text-2xl sm:text-3xl font-semibold">
                 Create Playlist
             </h3>

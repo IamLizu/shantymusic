@@ -125,7 +125,7 @@ export default function Profile({ title, children }) {
                 </div>
                 <main>{children}</main>
 
-                {songs ? <Player songList={songs} /> : null}
+                <Player songList={songs} />
             </div>
         </div>
     ) : null;
