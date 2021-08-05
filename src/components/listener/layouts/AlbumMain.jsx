@@ -46,7 +46,7 @@ export default function AlbumMain({
 }
 
 AlbumMain.propTypes = {
-    data: PropTypes.array.isRequired,
+    data: PropTypes.array,
     flexClassesVisibility: PropTypes.string,
     fullNameVisibility: PropTypes.string,
     shortNameVisibility: PropTypes.string,

@@ -50,7 +50,7 @@ export default function ArtistMain({
 }
 
 ArtistMain.propTypes = {
-    data: PropTypes.array.isRequired,
+    data: PropTypes.array,
     fullNameVisibility: PropTypes.string,
     shortNameVisibility: PropTypes.string,
 };

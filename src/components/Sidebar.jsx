@@ -70,5 +70,5 @@ Sidebar.propTypes = {
     closeButtonVisibility: PropTypes.string,
     handleCreateVisiblity: PropTypes.func.isRequired,
     shouldUpdate: PropTypes.number,
-    toggleSidebar: PropTypes.function,
+    toggleSidebar: PropTypes.func,
 };

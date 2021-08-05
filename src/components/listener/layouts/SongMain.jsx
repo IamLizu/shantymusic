@@ -58,7 +58,7 @@ export default function SongMain({
 
     const playlistsList = playlists
         ? playlists.map((item) => (
-              <p
+              <div
                   key={item.playlistId}
                   data-tip="Select playlist"
                   className="playlistItem"
@@ -66,7 +66,7 @@ export default function SongMain({
                   <p onClick={() => addSongToPlaylist(item.playlistId)}>
                       {item.playlistName}
                   </p>
-              </p>
+              </div>
           ))
         : null;
 
@@ -129,7 +129,7 @@ export default function SongMain({
 }
 
 SongMain.propTypes = {
-    data: PropTypes.array.isRequired,
+    data: PropTypes.array,
     flexClassesVisibility: PropTypes.string,
     fullNameVisibility: PropTypes.string,
     shortNameVisibility: PropTypes.string,
