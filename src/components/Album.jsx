@@ -3,9 +3,12 @@ import React from "react";
 import Main from "../components/listener/layouts/Main";
 import getAlbum from "../handlers/getAlbum";
 import { FaPlayCircle } from "react-icons/fa";
+import getAlbumSongs from "../handlers/getAlbumSongs";
+import SongList from "./listener/layouts/SongList";
 
 export default function Album({ match }) {
     const [album, setAlbum] = React.useState({});
+    const [songs, setSongs] = React.useState([]);
 
     React.useEffect(() => {
         (async () => {
@@ -13,6 +16,13 @@ export default function Album({ match }) {
             setAlbum(album);
 
             console.log("Getting album for dedicated page: Origin-server");
+
+            const { songs } = await getAlbumSongs(match.params.id);
+            setSongs(songs);
+
+            console.log(
+                "Getting album songs for dedicated page: Origin-server"
+            );
         })();
     }, []);
 
@@ -51,6 +61,8 @@ export default function Album({ match }) {
                     <div className="flexGap2 gap-6 mt-6">
                         <FaPlayCircle className="w-10 h-10 md:w-14 md:h-14 lg:w-20 lg:h-20 opacity-70 hover:opacity-80 cursor-pointer" />
                     </div>
+
+                    {songs ? <SongList songs={songs} /> : null}
                 </>
             ) : null}
         </Main>
