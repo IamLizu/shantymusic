@@ -4,6 +4,7 @@ import ReactTooltip from "react-tooltip";
 import { useClickAway } from "react-use";
 import addToPlaylist from "../../../handlers/listener/playlist/addToPlaylist";
 import getAllPlaylist from "../../../handlers/listener/playlist/getAllPlaylist";
+import { FaPlus } from "react-icons/fa";
 
 export default function SongList({ songs }) {
     const [
@@ -92,13 +93,13 @@ export default function SongList({ songs }) {
 
                     <button
                         data-tip="Add to playlist"
-                        className="-mt-2 float-right pr-5"
+                        className="-mt-1 float-right pr-5"
                         onClick={() => {
                             setCurrentSong(song.songId);
                             addToPlaylistToggler();
                         }}
                     >
-                        +
+                        <FaPlus />
                     </button>
                 </div>
             ))}
@@ -110,7 +111,6 @@ export default function SongList({ songs }) {
                 {playlistsList}
             </div>
 
-            <ReactTooltip />
             <ReactTooltip />
         </div>
     ) : null;

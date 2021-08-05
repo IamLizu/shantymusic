@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import ReactTooltip from "react-tooltip";
 import removeFromPlaylist from "../../../handlers/listener/playlist/removeFromPlaylist";
+import { FaTrashAlt } from "react-icons/fa";
 
 export default function SongList({ songs, playlist }) {
     const removeSongFromPlaylist = async (currentSong) => {
@@ -46,7 +47,7 @@ export default function SongList({ songs, playlist }) {
                             removeSongFromPlaylist(song.songId);
                         }}
                     >
-                        -
+                        <FaTrashAlt />
                     </button>
                 </div>
             ))}
