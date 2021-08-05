@@ -95,6 +95,10 @@ export default function Playlist({ match }) {
 
             if (playlist.songGetModels !== null) {
                 setSongs(playlist.songGetModels);
+                sessionStorage.setItem(
+                    "songs",
+                    JSON.stringify(playlist.songGetModels)
+                );
             }
         })();
     }, [match]);

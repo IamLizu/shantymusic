@@ -18,6 +18,7 @@ export default function Album({ match }) {
             console.log("Getting album for dedicated page: Origin-server");
 
             const { songs } = await getAlbumSongs(match.params.id);
+            sessionStorage.setItem("songs", JSON.stringify(songs));
             setSongs(songs);
 
             console.log(

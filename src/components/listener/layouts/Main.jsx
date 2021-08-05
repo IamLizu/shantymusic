@@ -22,6 +22,7 @@ export default function Profile({ title, children }) {
         "hidden"
     );
     const [playListCreated, setPlayListCreated] = useState(0);
+    const [songs, setSongs] = useState([]);
 
     const handleCreateVisiblity = () => {
         setCreatePlayListVisibiity("visibile");
@@ -79,6 +80,8 @@ export default function Profile({ title, children }) {
         setMenuButtonVisibility("hidden");
         handleWindowResize();
 
+        setSongs(JSON.parse(sessionStorage.getItem("songs")));
+
         window.addEventListener("resize", handleWindowResize);
 
         return () => {
@@ -122,7 +125,7 @@ export default function Profile({ title, children }) {
                 </div>
                 <main>{children}</main>
 
-                <Player />
+                {songs ? <Player songList={songs} /> : null}
             </div>
         </div>
     ) : null;
