@@ -7,6 +7,7 @@ import deletePlaylist from "../../../handlers/listener/playlist/deletePlaylist";
 import { useClickAway } from "react-use";
 import { useHistory } from "react-router-dom";
 import updatePlaylist from "../../../handlers/listener/playlist/updatePlaylist";
+import SongList from "../layouts/SongListInPlayList";
 
 export default function Playlist({ match }) {
     const [playlist, setPlaylist] = React.useState([]);
@@ -21,6 +22,7 @@ export default function Playlist({ match }) {
     const [updatedPlaylistName, setUpdatedPlaylistName] = React.useState("0");
     const [message, setMessage] = React.useState("");
     const [spanVisibility, setSpanVisibility] = React.useState("visible");
+    const [songs, setSongs] = React.useState([]);
 
     const onPlaylistNameChange = (e) => setUpdatedPlaylistName(e.target.value);
 
@@ -90,6 +92,10 @@ export default function Playlist({ match }) {
             console.log(
                 `Getting playlist ${match.params.id} for its dedicated page: Origin-Server`
             );
+
+            if (playlist.songGetModels !== null) {
+                setSongs(playlist.songGetModels);
+            }
         })();
     }, [match]);
 
@@ -177,6 +183,9 @@ export default function Playlist({ match }) {
                         </p>
                     </div>
                 </div>
+                {songs ? (
+                    <SongList songs={songs} playlist={match.params.id} />
+                ) : null}
             </>
         </Main>
     ) : null;
